@@ -95,11 +95,6 @@ public class ArrayCopyThreadSafe {
 
 直接`sleep`会不会好一点？还需要`lock`和`condition`配合使用吗？
 
->普及一下lock和condition配合使用的方法（可用来实现**生产者-消费者模式**）：
->
->* 当调用`condition.await()`时，会释放当前获得的锁，但会让线程阻塞在当前条件变量上，
->* 而当调用`condition.signalAll()`时，会唤醒所有阻塞在当前条件变量的线程。
-
 ### 1.2 疑问2
 
 接着是他们所谓的判断依据，我仔细思考后，感觉他们想表达出的观点是：如果子线程开始copy了但没copy完，此时主线程抢到cpu资源开始执行修改src数组的操作，之后，主线程与子线程互相争夺cpu，这样就导致dest(原代码中单词写错)数组的东西必然与original数组的不一样。
