@@ -108,6 +108,8 @@ public class ArrayCopyThreadSafe {
 
 因此，当使用`System.arraycopy`时，必须得加锁，若有其他线程要修改src数组，则必须获得锁才行。
 
+### 1.3 总结
+
 这才是真正的所谓的`System.arraycopy`线程不安全的原因以及正确的使用方法！！！
 
 说白了，`arraycopy`就是个`native`方法，人家官网也没说它是线程安全还是不安全，因为这个方法就只负责从堆里复制数据，安不安全，是要看你复制的`src`是不是共享资源，是不是线程安全。
